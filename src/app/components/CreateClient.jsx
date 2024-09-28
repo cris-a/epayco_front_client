@@ -16,6 +16,10 @@ const CreateClient = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const passwordRegex = /^(?=.*[A-Z])(?=(.*[A-Za-z]){4,})(?=(.*\d){4,})(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            alert('La contraseña debe contener al menos 1 letra mayúscula, 4 letras, 4 números y 1 símbolo.')
+        }
         if (password !== revPass) {
             alert('El password no coincide')
             return

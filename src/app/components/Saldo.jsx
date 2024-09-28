@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react'
-import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import Swal from 'sweetalert2'
+import clienteAxios from '../config/clienteAxios'
 
 const Saldo = () => {
     const [clientDocument, setClientDocument] = useState('')
@@ -19,11 +19,11 @@ const Saldo = () => {
         }
 
         try {
-            const { data } = await axios.post("http://localhost:3001/api/v1/public/balance/saldo", { clientDocument, phone })
-            console.log(data);
+            const { data } = await clienteAxios.post("balance/saldo", { clientDocument, phone })
             Swal.fire(`Tu saldo actual es $${data.data.saldo}`);
-            // router.push('/')
-
+            setTimeout(() => {
+                router.push('/')
+            }, 1500);
         } catch (error) {
             if (error.response) {
                 alert(error.response.data.message)

@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import axios from 'axios'
 import Swal from 'sweetalert2'
+import clienteAxios from '../config/clienteAxios'
 
 const CreateClient = () => {
     const [name, setName] = useState('')
@@ -27,7 +27,7 @@ const CreateClient = () => {
         }
 
         try {
-            const { data } = await axios.post("http://localhost:3001/api/v1/public/clients/create", { name, clientDocument, phone, email, password })
+            const { data } = await clienteAxios.post("clients/create", { name, clientDocument, phone, email, password })
             Swal.fire({
                 position: "top-end",
                 icon: "success",
